@@ -1,0 +1,46 @@
+﻿Location,Transect,DNF_Rate,Source ,Units
+Temperate Forest Soil: China,Upland,NA,Zhang et al 2009,umol N m-2 d-1
+Temperate Forest Soil: China,Upland,NA,Zhang et al 2009,umol N m-2 d-1
+Temperate Forest Soil: China,Upland,NA,Zhang et al 2009,umol N m-2 d-1
+Temperate Forest Soil: China,Upland,NA,Zhang et al 2009,umol N m-2 d-1
+Pine forest soils (Dutch),Upland,NA,Kroeze et al 1989,umol N m-2 d-1
+Forest Soils: Michigan USA,Upland,3836,Groffman & Tiedje 1989,umol N m-2 d-1
+Forest Soils: Michigan USA,Upland_Wet,153425,Groffman & Tiedje 1989,umol N m-2 d-1
+Wet Forest Soils (Amsterdam?),Upland,4910,Struwe & Kjolle 1991,umol N m-2 d-1
+Floodplain Forest (Georgia USA),Upland_Wet,312480,"Marton et al., 2012",umol N m-2 d-1
+Floodplain Forest (Georgia USA),Upland_Wet,1545600,"Marton et al., 2012",umol N m-2 d-1
+Review of forest soils,Upland,3836,"Barton et al., 1999",umol N m-2 d-1
+"York River Marsh, Virginia USA",Wetland,43200,"Tobias, et al., 2001",umol N m-2 d-1
+"York River Marsh, Virginia USA",Wetland,422400,"Tobias, et al., 2001",umol N m-2 d-1
+"Natural Marsh, North Carolina, USA",Wetland,500,"Thompson et al., 1995",umol N m-2 d-1
+"Juncus Marsh, Dauphin Island, USA",Wetland,1152000,"Mason et al., 2021",umol N m-2 d-1
+"Spartina Marsh, Dauphin Island, USA",Wetland,386400,"Mason et al., 2021",umol N m-2 d-1
+"Spartina Alterniflora, New England, USA",Wetland,1344000,"Ooi et al., 2021",umol N m-2 d-1
+"Spartina patens, New England, USA",Wetland,8400000,"Ooi et al., 2021",umol N m-2 d-1
+"Phragmites australis, New England, USA",Wetland,18816000,"Ooi et al., 2021",umol N m-2 d-1
+winter marsh,Wetland,16224,"Sousa et al., 2012",umol N m-2 d-1
+summer marsh ,Wetland,3624,"Sousa et al., 2012",umol N m-2 d-1
+"Marsh, Plum Island Sound, USA",Wetland,124.8,Koop-Jakobsen & Giblin 2010,umol N m-2 d-1
+Wetland/delta ,Wetland,432,"Upreti et al., 2022",umol N m-2 d-2
+Wetland Delta ,Wetland,2712,"Upreti et al., 2022",umol N m-2 d-2
+"Sweet Hall Marsh, Virginia, USA",Wetland,2845,This Study,umol N m-2 d-2
+"Goodwin Islands, Virginia, USA",Wetland,59657,This Study,umol N m-2 d-2
+"Moneystump Swamp, Maryland, USA",Wetland,437,This Study,umol N m-2 d-2
+"GCReW, Maryland, USA",Wetland,873,This Study,umol N m-2 d-2
+"Sweet Hall Marsh, Virginia, USA",Transition,20221,This Study,umol N m-2 d-2
+"Goodwin Islands, Virginia, USA",Transition,29986,This Study,umol N m-2 d-2
+"Moneystump Swamp, Maryland, USA",Transition,7954,This Study,umol N m-2 d-2
+"GCReW, Maryland, USA",Transition,16169,This Study,umol N m-2 d-2
+"Sweet Hall Marsh, Virginia, USA",Upland_Wet,16333,This Study,umol N m-2 d-1
+"Sweet Hall Marsh, Virginia, USA",Upland,16333,This Study,umol N m-2 d-1
+"Goodwin Islands, Virginia, USA",Upland,322,This Study,umol N m-2 d-1
+"Moneystump Swamp, Maryland, USA",Upland,605,This Study,umol N m-2 d-1
+"GCReW, Maryland, USA",Upland,406,This Study,umol N m-2 d-1
+"Sweet Hall Marsh, Virginia, USA",Wetland,2845,This Study,umol N m-2 d-2
+"Goodwin Islands, Virginia, USA",Wetland,59657,This Study,umol N m-2 d-2
+"Moneystump Swamp, Maryland, USA",Wetland,437,This Study,umol N m-2 d-2
+"GCReW, Maryland, USA",Wetland,873,This Study,umol N m-2 d-2
+"Sweet Hall Marsh, Virginia, USA",Transition,20221,This Study,umol N m-2 d-2
+"Goodwin Islands, Virginia, USA",Transition,29986,This Study,umol N m-2 d-2
+"Moneystump Swamp, Maryland, USA",Transition,7954,This Study,umol N m-2 d-2
+"GCReW, Maryland, USA",Transition,16169,This Study,umol N m-2 d-2
