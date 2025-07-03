@@ -1,0 +1,5 @@
+"0","log <- log[ ,-c(1)]"
+"0","log <- rbind(log, Slopes)"
+"0",""
+"0","Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col=Curve)) + geom_point(size=4) + geom_line() + theme_bw()"
+"0","Slopes_chk"
