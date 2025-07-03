@@ -1,0 +1,22 @@
+﻿,IDs,Date,Month,Year,Campaign,Site,Zone,Depth,Rep,Sample.Name,H2S_mean_uM,H2S_sd,H2S_cv,H2S_flag,Dilution,H2S_cv_flag
+22,3,202209,September,2022,MonMon,MSM,UP,10,B,MSM_UP_LysB_10cm,0.162899573,0.05182672,31.81513531,within range,1,High CV rerun
+55,6,202209,September,2022,MonMon,MSM,UP,10,C,MSM_UP_LysC_10cm,0.785898998,0,0,within range,1,within range
+77,9,202209,September,2022,MonMon,MSM,TR,10,A,MSM_TR_LysA_10cm,4.352876093,0.084632679,1.944293315,within range,1,within range
+4,12,202209,September,2022,MonMon,MSM,TR,10,B,MSM_TR_LysB_10cm,5.598874941,0.169265358,3.023203046,within range,1,within range
+9,17,202209,September,2022,MonMon,MSM,WC,10,A,MSM_WC_SipA_10cm,160.4203397,7.566701077,4.716796568,within range,1,within range
+13,20,202209,September,2022,MonMon,MSM,WC,10,B,MSM_WC_SipB_10cm,178.7194208,3.236854227,1.811137375,within range,1,within range
+16,23,202209,September,2022,MonMon,MSM,WC,10,C,MSM_WC_SipC_10cm,174.5905227,6.736011624,3.858177134,within range,1,within range
+25,32,202209,September,2022,MonMon,GWI,UP,10,B,GWI_UP_LysB_10cm,0,0,0,bdl,1,within range
+28,35,202209,September,2022,MonMon,GWI,UP,10,C,GWI_UP_LysC_10cm,0.810330348,0.042316339,5.22210967,within range,1,within range
+30,37,202209,September,2022,MonMon,GWI,TR,10,A,GWI_TR_LysA_10cm,4.499464193,0.084632679,1.880950159,within range,1,within range
+34,40,202209,September,2022,MonMon,GWI,TR,10,B,GWI_TR_LysB_10cm,0,0,0,bdl,1,within range
+37,43,202209,September,2022,MonMon,GWI,TR,10,C,GWI_TR_LysC_10cm,0,0,0,bdl,1,within range
+40,46,202209,September,2022,MonMon,GWI,WC,10,A,GWI_WC_SipA_10cm,0,0,0,bdl,1,within range
+43,49,202209,September,2022,MonMon,GWI,WC,10,B,GWI_WC_SipB_10cm,0.089605524,0.05182672,57.83875553,within range,1,High CV rerun
+47,52,202209,September,2022,MonMon,GWI,WC,10,C,GWI_WC_SipC_10cm,0.712604948,0,0,within range,1,within range
+57,61,202209,September,2022,MonMon,Gcrew,TR,10,B,GCrew_TR_LysB_10cm,0,0,0,bdl,1,within range
+60,64,202209,September,2022,MonMon,Gcrew,TR,10,C,GCrew_TR_LysC_10cm,0,0,0,bdl,1,within range
+63,67,202209,September,2022,MonMon,Gcrew,WC,10,A,GCrew_WC_SipA_10cm,944.3228737,37.2265054,3.942137423,within range,12.5,within range
+67,70,202209,September,2022,MonMon,Gcrew,WC,10,B,GCrew_WC_SipB_10cm,1292.164219,41.38369789,3.202665519,within range,12.5,within range
+70,73,202209,September,2022,MonMon,Gcrew,WC,10,C,GCrew_WC_SipC_10cm,524.714438,32.39169982,6.173205361,within range,12.5,within range
+53,58,202209,September,2022,MonMon,Gcrew,UP,20,A,GCrew_UP_LysA_20cm,0,0,0,bdl,1,within range

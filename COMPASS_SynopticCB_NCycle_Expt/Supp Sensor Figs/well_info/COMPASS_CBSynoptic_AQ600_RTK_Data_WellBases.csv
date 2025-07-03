@@ -1,0 +1,25 @@
+﻿Site,Site Code,Zone,Zone Code,Well ID,Location of Measure,Field User Description,Easting,Northing,Elevation,GlobalLati,GlobalLong,GlobalElli,LocalLatit,LocalLongi,LocalEllip,H_Prec_Obs,V_Prec_Obs,Date_Obs,Time_Obs,Notes
+Goodwin Islands,GWI,Wetland,WC,GWI_WC_AQ600,Well Base,wetland well base,374888.8397,4120082.626,0.556758,0.649592,-1.333608,-35.512576,37.218857,-76.410135,-35.512538,0.009082,0.014222,11/14/2024,10:17:28 AM,
+Goodwin Islands,GWI,Transition,TR,GWI_TR_AQ600,Well Base,TR-well base,374967.4411,4120126.39,0.671997,0.649599,-1.333593,-35.398375,37.219261,-76.409257,-35.398337,0.014057,0.023104,11/14/2024,11:15:57 AM,
+Goodwin Islands,GWI,Upland,UP,GWI_UP_AQ600,Well Base,upland well base,375027.7496,4120125.477,1.060355,0.649599,-1.333581,-35.011647,37.219261,-76.408577,-35.011609,0.028691,0.050698,11/14/2024,10:34:12 AM,
+Sweet Hall,SWH,Wetland,WC,SWH_WC_AQ600,Well Base,wcwellbase,332462.05,4159417.16,0.183755,NA,NA,NA,37.5666,-76.8970,-34.2257,0.014307,0.015777,2/18/2025,11:21:14 AM,
+Sweet Hall,SWH,Transition,TR,SWH_TR_AQ600,Well Base,trwellbottom,332511.74,4159664.63,0.468570,NA,NA,NA,37.5688,-76.8965,-33.9374,0.020840,0.031770,2/18/2025,1:18:25 PM,
+Sweet Hall,SWH,Swamp,SWAMP,SWH_SWAMP_AQ600,Well Base,swampawellbottom,332587.08,4159858.33,0.714962,NA,NA,NA,37.5706,-76.8957,-33.6890,0.016841,0.034841,2/18/2025,1:01:30 PM,
+Sweet Hall,SWH,Upland,UP,SWH_UP_AQ600,Well Base,upwellbase,332620.67,4159892.16,1.074645,NA,NA,NA,37.5709,-76.8953,-33.3294,0.035604,0.074296,2/18/2025,11:48:36 AM,
+GCReW,GCW,Wetland,WC,GCW_WC_AQ600,Well Base,GCW_WC_AQ,439048.973,134217.768,0.313,NA,NA,NA,38.87492266N,76.54999229W,-33.072,0.011,0.024,20231215,NA,
+GCReW,GCW,Transition,TR,GCW_TR_AQ600,Well Base,GCW_TR_AQ,438936.619,134165.497,0.434,NA,NA,NA,38.87445676N,76.55129001W,-32.949,0.059,0.102,20231220,NA,
+GCReW,GCW,Upland,UP,GCW_WC_AQ600,Well Base,GCW_UP_AQ,438869.967,134173.811,5.06,NA,NA,NA,38.87453461N,76.55205764W,-28.321,0.103,0.11,20231220,NA,
+Moneystump Swamp,MSM,Wetland,WC,MSM_WC_AQ600,Well Base,MSM_WC_AQ,4254143.719,392861.397,0.324,NA,NA,NA,38.42913674N,76.22746098W,-34.577,0.013,0.015,20240124,NA,"RTK measurements of elevation, northing and easting done in 2025"
+Moneystump Swamp,MSM,Transition,TR,MSM_TR_AQ600,Well Base,MSM_TR_AQ,4254284.944,392905.555,0.479,NA,NA,NA,38.43041094N,76.22698380W,-34.803,0.152,0.024,20240124,NA,"RTK measurements of elevation, northing and easting done in 2025"
+Moneystump Swamp,MSM,Upland,UP,MSM_UP_AQ600,Well Base,MSM_UP_AQ,4254333.424,392974.722,0.719,NA,NA,NA,38.43083963N,76.22619143W,-30.258,0.341,0.005,20240124,NA,"TS measurements of elevation, northing and easting done in 2025"
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,6 @@
+"0",""
+"0","setwd(""S:/Biogeochemistry/COMPASS Synoptics/Samples & Data/GHG/Soil GHG/Raw Data Files/2024"")"
+"2","Warning: The working directory was changed to S:/Biogeochemistry/COMPASS Synoptics/Samples & Data/GHG/Soil GHG/Raw Data Files/2024 inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks."
+"0","#Read in June Data "
+"0","raw <- read.csv(""COMPASS_CBSYN_SGW_202406_entered.csv"")"
+"0","head(raw)"

@@ -1,0 +1,109 @@
+"","Month","Site","Zone","Depth","RP_mV","value","value_corr"
+"28","August","MSM","Upland",10,"X1_mV",164.3,329.72
+"91","August","MSM","Upland",10,"X2_mV",92.5,257.92
+"154","August","MSM","Upland",10,"X3_mV",238.8,404.22
+"217","August","MSM","Upland",10,"X4_mV",239.8,405.22
+"280","August","MSM","Upland",10,"X5_mV",-146.3,19.12
+"343","August","MSM","Upland",10,"X6_mV",160.6,326.02
+"31","August","MSM","Transition",10,"X1_mV",75.3,295.59
+"94","August","MSM","Transition",10,"X2_mV",43.7,263.99
+"157","August","MSM","Transition",10,"X3_mV",71.5,291.79
+"220","August","MSM","Transition",10,"X4_mV",85.5,305.79
+"283","August","MSM","Transition",10,"X5_mV",29.5,249.79
+"346","August","MSM","Transition",10,"X6_mV",22.7,242.99
+"34","August","MSM","Marsh",10,"X1_mV",-195.1,-9.62
+"97","August","MSM","Marsh",10,"X2_mV",-202.4,-16.92
+"160","August","MSM","Marsh",10,"X3_mV",-204.1,-18.62
+"223","August","MSM","Marsh",10,"X4_mV",-210.5,-25.02
+"286","August","MSM","Marsh",10,"X5_mV",-192.6,-7.12
+"349","August","MSM","Marsh",10,"X6_mV",-245.5,-60.02
+"2810","August","GWI ","Upland",10,"X1_mV",345.5,510.92
+"911","August","GWI ","Upland",10,"X2_mV",360.3,525.72
+"1541","August","GWI ","Upland",10,"X3_mV",165.1,330.52
+"2171","August","GWI ","Upland",10,"X4_mV",363.1,528.52
+"2801","August","GWI ","Upland",10,"X5_mV",372.7,538.12
+"3431","August","GWI ","Upland",10,"X6_mV",343.3,508.72
+"3110","August","GWI ","Transition",10,"X1_mV",31.8,252.09
+"941","August","GWI ","Transition",10,"X2_mV",-67.2,153.09
+"1571","August","GWI ","Transition",10,"X3_mV",8.3,228.59
+"2201","August","GWI ","Transition",10,"X4_mV",71.5,291.79
+"2831","August","GWI ","Transition",10,"X5_mV",106.1,326.39
+"3461","August","GWI ","Transition",10,"X6_mV",92.6,312.89
+"3410","August","GWI ","Marsh",10,"X1_mV",58.7,244.18
+"971","August","GWI ","Marsh",10,"X2_mV",44.7,230.18
+"1601","August","GWI ","Marsh",10,"X3_mV",80.7,266.18
+"2231","August","GWI ","Marsh",10,"X4_mV",74.4,259.88
+"2861","August","GWI ","Marsh",10,"X5_mV",41.7,227.18
+"3491","August","GWI ","Marsh",10,"X6_mV",58,243.48
+"1912","August","Gcrew","Upland",10,"X1_mV",337.7,503.12
+"732","August","Gcrew","Upland",10,"X2_mV",306.2,471.62
+"1272","August","Gcrew","Upland",10,"X3_mV",328.7,494.12
+"1812","August","Gcrew","Upland",10,"X4_mV",111.3,276.72
+"2352","August","Gcrew","Upland",10,"X5_mV",314.8,480.22
+"2892","August","Gcrew","Upland",10,"X6_mV",305.7,471.12
+"2212","August","Gcrew","Transition",10,"X1_mV",-157.1,63.19
+"762","August","Gcrew","Transition",10,"X2_mV",-145.3,74.99
+"1302","August","Gcrew","Transition",10,"X3_mV",-115,105.29
+"1842","August","Gcrew","Transition",10,"X4_mV",-179.9,40.39
+"2382","August","Gcrew","Transition",10,"X5_mV",-133.4,86.89
+"2922","August","Gcrew","Transition",10,"X6_mV",-147.6,72.69
+"2512","August","Gcrew","Marsh",10,"X1_mV",-214.2,-28.72
+"792","August","Gcrew","Marsh",10,"X2_mV",-211.8,-26.32
+"1332","August","Gcrew","Marsh",10,"X3_mV",-112.8,72.68
+"1872","August","Gcrew","Marsh",10,"X4_mV",-210,-24.52
+"2413","August","Gcrew","Marsh",10,"X5_mV",-178.6,6.88
+"2952","August","Gcrew","Marsh",10,"X6_mV",-214,-28.52
+"37","September","MSM","Upland",10,"X1_mV",122.9,288.32
+"100","September","MSM","Upland",10,"X2_mV",132.5,297.92
+"163","September","MSM","Upland",10,"X3_mV",80.1,245.52
+"226","September","MSM","Upland",10,"X4_mV",22,187.42
+"289","September","MSM","Upland",10,"X5_mV",-4.8,160.62
+"352","September","MSM","Upland",10,"X6_mV",-29.6,135.82
+"40","September","MSM","Transition",10,"X1_mV",-75.8,144.49
+"103","September","MSM","Transition",10,"X2_mV",-42.2,178.09
+"166","September","MSM","Transition",10,"X3_mV",-180.6,39.69
+"229","September","MSM","Transition",10,"X4_mV",-80.7,139.59
+"292","September","MSM","Transition",10,"X5_mV",-226.6,-6.31
+"355","September","MSM","Transition",10,"X6_mV",-188.3,31.99
+"43","September","MSM","Marsh",10,"X1_mV",-267.1,-81.6200000000001
+"106","September","MSM","Marsh",10,"X2_mV",-238.8,-53.32
+"169","September","MSM","Marsh",10,"X3_mV",-288.5,-103.02
+"232","September","MSM","Marsh",10,"X4_mV",-265.8,-80.3200000000001
+"295","September","MSM","Marsh",10,"X5_mV",-216,-30.52
+"358","September","MSM","Marsh",10,"X6_mV",-165.5,19.98
+"3710","September","GWI ","Upland",10,"X1_mV",NA,NA
+"1001","September","GWI ","Upland",10,"X2_mV",NA,NA
+"1631","September","GWI ","Upland",10,"X3_mV",NA,NA
+"2261","September","GWI ","Upland",10,"X4_mV",NA,NA
+"2891","September","GWI ","Upland",10,"X5_mV",NA,NA
+"3521","September","GWI ","Upland",10,"X6_mV",NA,NA
+"401","September","GWI ","Transition",10,"X1_mV",NA,NA
+"1031","September","GWI ","Transition",10,"X2_mV",NA,NA
+"1661","September","GWI ","Transition",10,"X3_mV",NA,NA
+"2291","September","GWI ","Transition",10,"X4_mV",NA,NA
+"2921","September","GWI ","Transition",10,"X5_mV",NA,NA
+"3551","September","GWI ","Transition",10,"X6_mV",NA,NA
+"431","September","GWI ","Marsh",10,"X1_mV",NA,NA
+"1061","September","GWI ","Marsh",10,"X2_mV",NA,NA
+"1691","September","GWI ","Marsh",10,"X3_mV",NA,NA
+"2321","September","GWI ","Marsh",10,"X4_mV",NA,NA
+"2951","September","GWI ","Marsh",10,"X5_mV",NA,NA
+"3581","September","GWI ","Marsh",10,"X6_mV",NA,NA
+"2812","September","Gcrew","Upland",10,"X1_mV",287.6,453.02
+"822","September","Gcrew","Upland",10,"X2_mV",243.5,408.92
+"1362","September","Gcrew","Upland",10,"X3_mV",238.1,403.52
+"1902","September","Gcrew","Upland",10,"X4_mV",334.2,499.62
+"2442","September","Gcrew","Upland",10,"X5_mV",277.9,443.32
+"2982","September","Gcrew","Upland",10,"X6_mV",205.4,370.82
+"3112","September","Gcrew","Transition",10,"X1_mV",-49.5,170.79
+"852","September","Gcrew","Transition",10,"X2_mV",170.5,390.79
+"1392","September","Gcrew","Transition",10,"X3_mV",22.8,243.09
+"1932","September","Gcrew","Transition",10,"X4_mV",188.1,408.39
+"2472","September","Gcrew","Transition",10,"X5_mV",18.9,239.19
+"3013","September","Gcrew","Transition",10,"X6_mV",-23.2,197.09
+"3412","September","Gcrew","Marsh",10,"X1_mV",-230.1,-44.62
+"882","September","Gcrew","Marsh",10,"X2_mV",-353.9,-168.42
+"1422","September","Gcrew","Marsh",10,"X3_mV",-264.8,-79.3200000000001
+"1962","September","Gcrew","Marsh",10,"X4_mV",-255.4,-69.92
+"2502","September","Gcrew","Marsh",10,"X5_mV",-300.1,-114.62
+"3042","September","Gcrew","Marsh",10,"X6_mV",-292.5,-107.02

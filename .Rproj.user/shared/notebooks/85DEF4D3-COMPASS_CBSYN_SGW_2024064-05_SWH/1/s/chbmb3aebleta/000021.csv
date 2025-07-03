@@ -1,0 +1,4 @@
+"0",""
+"0","#rejoin them to the dataframe"
+"0","alldat <- cbind(IDs, Samples1)"
+"0","head(alldat)"

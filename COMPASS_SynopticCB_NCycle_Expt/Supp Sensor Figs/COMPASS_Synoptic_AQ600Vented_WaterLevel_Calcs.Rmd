@@ -1,0 +1,443 @@
+---
+title: 'COMPASS Synoptic CB: AQ600 Water Level Calculation: September 2023'
+author: "Stephanie J. Wilson"
+date: "2024-05-14"
+output: html_document
+---
+#COMPASS Synoptic CB 
+#Aquatroll waterlevel calculations 
+
+Authors: Peter Regier & Stephanie J. Wilson 
+Last Updated: 05-07-2024
+
+Goal of this code: 
+  To take the raw L1 data and calculate waterlevels from pressure and density measured by the aquatroll overtime 
+  
+```{r setup, include=FALSE}
+
+library(googlesheets4)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(lubridate)
+library(here)
+
+```
+
+#Read in L1 Dataset
+```{r}
+
+#download the L1 dataset from: https://drive.google.com/drive/folders/1RP-hxmjAYNGzTfCNpYbMN6U_zbZmEWHM
+
+#set path to local drive where files can be found: 
+L1 <- "Supp Sensor Figs/"
+#L1 <- "S:/Biogeochemistry/COMPASS Synoptics/Samples & Data/Synoptic L1 Sensor/L1_20241107"
+
+#read in datafiles from L1 
+files <- list.files(L1, pattern = "*.csv", full.names = TRUE, recursive = FALSE)
+
+```
+
+#Read files and create master dataframe
+```{r}
+#create dataframe for collated data 
+results <- list()
+
+#for(f in files[[150]]){ #example to trial with a single file
+for(f in files){
+  message(f)
+  
+  selected_research_names = c("gw_pressure", "gw_density", "gw_temperature", "gw_salinity")
+  
+  dat <- read.csv(f)
+  
+  troll <- subset(dat, Instrument == "AquaTROLL600")
+  
+  gw <- troll %>% 
+    filter(research_name %in% selected_research_names) %>%
+    dplyr::select(TIMESTAMP, research_name, Value, F_OOB, F_OOS, Plot, Site)
+  
+  results[[f]] <- gw 
+}
+
+#we need to bind these together 
+dat <- do.call(rbind, results)
+rownames(dat) <- NULL
+head(dat)
+
+
+#convert to wide format 
+gw1 <- pivot_wider(dat, id_cols = c("TIMESTAMP", "Plot", "Site"), names_from = research_name, values_from = Value )
+head(gw1)
+
+gw1$year <- lubridate::year(gw1$TIMESTAMP)
+head(gw1)
+```
+
+#Pull in Well Base Elevations - not really needed anymore doing water table depth 
+```{r}
+
+#read in well base elevations (so how high the ground is)
+
+well_elevation <- 
+  read.csv("well_info/COMPASS_CBSynoptic_AQ600_RTK_Data_WellBases.csv")   %>%
+  rename(Long_site = Site,
+         Site = Site.Code, 
+         Plot = Zone.Code) %>%
+  mutate(Plot = case_when(Plot == "WC" ~ "W", 
+                          TRUE ~ Plot )) %>% 
+  dplyr::select(Site, Plot, Elevation)
+
+well_elevation$Elevation_cm <- (well_elevation$Elevation * 100)
+
+#Got to change the Column names so that Site is also startign with a captial letter 
+#colnames(well_dimensions) <- c("Site", "Plot", "ground_to_sensor_cm")
+#head(well_dimensions)
+
+gw1$Plot <- as.factor(gw1$Plot)
+levels(gw1$Plot) <- list(UP = "UP", TR = "TR", W = "W", UP = "SWAMP")
+
+## Add well dimensions to dataset: inner_join ensures no uncorrected WL data makes it through
+df_raw_depths <- inner_join(gw1, well_elevation, by = c("Site", "Plot")) #%>% 
+  #filter(!is.na(pressure_mbar))
+head(df_raw_depths)
+
+```
+
+
+#Pull in Well Dimension & Depth to Sensor Data
+```{r}
+## Second, read in well dimensions. These are measurements made when installing
+## sensors, and are used to calculate the distance below-ground that the 
+
+well_dimensions <- 
+  read.csv("well_info/well_dimensions.csv") %>% 
+  mutate(Plot = case_when(transect_location == "Upland" ~ "UP", 
+                              transect_location == "Transition" ~ "TR", 
+                              transect_location == "Wetland" ~ "W"), 
+         ground_to_sensor_cm = ring_to_pressure_sensor_cm - (well_top_to_ground_cm - bolt_to_cap_cm)) %>% 
+  dplyr::select(site, Plot, ground_to_sensor_cm)
+
+#Got to change the Column names so that Site is also startign with a captial letter 
+#colnames(well_dimensions) <- c("Site", "Plot", "ground_to_sensor_cm")
+#head(well_dimensions)
+
+gw1$Plot <- as.factor(gw1$Plot)
+levels(gw1$Plot) <- list(UP = "UP", TR = "TR", W = "W", UP = "SWAMP")
+
+## Add well dimensions to dataset: inner_join ensures no uncorrected WL data makes it through
+df_raw_depths <- inner_join(df_raw_depths, well_dimensions, by = c("Site" = "site", "Plot")) #%>% 
+  #filter(!is.na(pressure_mbar))
+head(df_raw_depths)
+
+```
+
+#Calculate water depth from pressure, density, and well data
+```{r}
+
+#need to account for GCW Upland water density being off in the logger data - there was a column shift on the SDI settings that 
+#propagated through the density is almost always 0.999 so we will assume a density of 1 for GCW UP measurements 
+
+df_raw_depths <- df_raw_depths %>%
+  mutate(gw_density = ifelse(Site == "GCW" & Plot == "UP", 1, gw_density))
+
+# need to add elevation to the ground_to_sensor_cm to account for elevation changes 
+
+df_raw_depths$elevation_to_sensor_cm <- df_raw_depths$Elevation_cm + df_raw_depths$ground_to_sensor_cm
+
+
+#The aquatrolls in TMP in 2022 were non-vented so they need corrected for barometric pressure 
+df_raw_depths <- df_raw_depths %>%
+  mutate(gw_pressure = case_when(
+    Plot == "UP" & Site == "GCW" ~ gw_pressure - 1013.25,
+    TRUE ~ gw_pressure  # keep all other values the same
+  ))
+
+#gw_density 
+#L1 data bounds: 0.98, 1.05
+#units g/cm3
+
+#gw_pressure          
+#sensor units: psi      
+#L1 data set units: mbar      
+#L1 data bounds: -10, 910    
+#Info: AQ600 Vented pressure already corrected for barometric pressure
+
+#Convert to water depth (h = P [mbar] * 100 [Pa/mbar])/(rho [g/cm3]*1000 [kg/m3//g/cm3]*g [m/s2]) where [Pa]=[kgm/s2m2]
+#9.80665 = specific gravity 
+
+#second step is water level below surface of ground (divide ground to sensor so it is in m) subtract ground to sensor from pressure head
+
+df <- df_raw_depths %>% 
+  mutate(pressurehead_m = (gw_pressure * 100) / (gw_density * 1000 * 9.80665), 
+         wl_below_surface_m = pressurehead_m - (ground_to_sensor_cm / 100)) 
+head(df)
+
+
+```
+
+#Take an initial look at the data 
+```{r}
+
+compass_coolors <- c("#FFBC42", "#20063B",  "#419973")
+#should we try to do some initial plots? 
+#maybe we subset by week or something and plot some up? 
+
+df$year <- as.factor(df$year)
+levels(df$year)
+df$day <- lubridate::day(df$TIMESTAMP)
+df$datetime = parsedate::parse_date(df$TIMESTAMP)
+
+
+
+ggplot(df, aes(datetime, wl_below_surface_m, color = Plot)) +
+  geom_point( alpha = 0.5) +
+  facet_wrap(year ~ Site, scales = "free_y") + 
+  labs(x = "", y = "Waterlevel (m)") +
+  scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d")
+  #scale_color_manual(values = location_colors) #+
+  #scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d")
+ #facet_wrap(~Site, nrow = 1, scales = "free_y") +
+
+yr22 <- subset(df, year == "2022")
+plot22 <- ggplot(yr22, aes(datetime, wl_below_surface_m, color = Plot)) +
+           geom_point( alpha = 0.5) +
+            geom_line( ) + 
+             facet_wrap(~ Site, scales = "free_y") + 
+             labs(title = "2022", x = "", y = "Depth to Water Table (m)") +
+            scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "none", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=11), 
+                 axis.title=element_text(size=12), 
+                strip.text.x = element_text(size = 12)) 
+plot22
+
+
+yr23 <- subset(df, year == "2023")
+plot23 <- ggplot(yr23, aes(datetime, wl_below_surface_m, color = Plot)) +
+           geom_point( alpha = 0.5) +
+            geom_line( ) + 
+             facet_wrap(~ Site, scales = "free_y") + 
+             labs(title = "2023", x = "", y = "Depth to Water Table (m)") +
+            scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "bottom", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=11), 
+                 axis.title=element_text(size=12), 
+                strip.text.x = element_text(size = 12)) 
+plot23
+
+#do years at each site next to one another 
+
+gcw <- subset(df, Site == "GCW")
+gcw <- gcw %>% 
+    filter(!wl_below_surface_m > 6.4)
+gcwplot <- ggplot(gcw, aes(datetime, wl_below_surface_m, color = Plot)) +
+           geom_point( alpha = 0.5) +
+            geom_line( ) + 
+             facet_wrap(~ year, scales = "free_x") + 
+             labs(title = "GCReW", x = "", y = "Depth to Water Table (m)") +
+            scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+              ylim(-1, 6.4) + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "bottom", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=11), 
+                 axis.title=element_text(size=12), 
+                strip.text.x = element_text(size = 12)) 
+gcwplot
+
+gwi <- subset(df, Site == "GWI")
+gwiplot <- ggplot(gwi, aes(datetime, wl_below_surface_m, color = Plot)) +
+           geom_point( alpha = 0.5) +
+            geom_line( ) + 
+             facet_wrap(~ year, scales = "free_x") + 
+             labs(title = "Goodwin Islands", x = "", y = "Depth to Water Table (m)") +
+            scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "bottom", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=11), 
+                 axis.title=element_text(size=12), 
+                strip.text.x = element_text(size = 12)) 
+gwiplot
+
+msm <- subset(df, Site == "MSM")
+msm <- msm %>% 
+    filter(wl_below_surface_m > -0.7)
+msmplot <- ggplot(msm, aes(datetime, wl_below_surface_m, color = Plot)) +
+           geom_point( alpha = 0.5) +
+            geom_line( ) + 
+             facet_wrap(~ year, scales = "free_x") + 
+             labs(title = "Moneystump Swamp", x = "", y = "Depth to Water Table (m)") +
+            scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "bottom", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=11), 
+                 axis.title=element_text(size=12), 
+                strip.text.x = element_text(size = 12)) 
+msmplot
+
+swh <- subset(df, Site == "SWH")
+swhplot <- ggplot(swh, aes(datetime, wl_below_surface_m, color = Plot)) +
+           geom_point( alpha = 0.5) +
+            geom_line( ) + 
+             facet_wrap(~ year, scales = "free_x") + 
+             labs(title = "Sweet Hall Marsh", x = "", y = "Depth to Water Table (m)") +
+            scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "bottom", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=11), 
+                 axis.title=element_text(size=12), 
+                strip.text.x = element_text(size = 12)) 
+swhplot
+
+library(ggpubr)
+
+#levels <- ggarrange(swhplot, gcwplot, msmplot, gwiplot, ncol=1, nrow=4, common.legend = TRUE)
+#levels
+
+#####################
+# This is the figure that ended up in the supplemental material
+##################
+
+levels <- ggplot(df, aes(datetime, wl_below_surface_m, color = Plot)) +
+           geom_point( alpha = 0.2) +
+            geom_line( ) + 
+             #facet_wrap(Site ~ year, scales = "free_x") + 
+              facet_grid(Site ~ year, scales = "free") + 
+             labs(title = " ", x = "", y = "Depth to Water Table (m)") +
+            scale_x_datetime(date_breaks = "7 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              geom_hline(yintercept=0, color = "grey", linetype="solid", size=0.5) + 
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "bottom", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=10), 
+                 axis.title=element_text(size=10), 
+                strip.text.x = element_text(size = 10), 
+                axis.text.x = element_text(size=10), 
+                axis.text.y = element_text(size=10 )) 
+levels
+```
+
+#Salinity Data 
+```{r}
+
+compass_coolors <- c("#FFBC42", "#20063B",  "#419973")
+#should we try to do some initial plots? 
+#maybe we subset by week or something and plot some up? 
+
+df$year <- as.factor(df$year)
+levels(df$year)
+df$day <- lubridate::day(df$TIMESTAMP)
+df$datetime = parsedate::parse_date(df$TIMESTAMP)
+
+
+ggplot(df, aes(datetime, gw_salinity, color = Plot)) +
+  geom_point( alpha = 0.5) +
+  facet_wrap(year ~ Site, scales = "free_y") + 
+  labs(x = "", y = "Waterlevel (m)") +
+  scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d")
+  #scale_color_manual(values = location_colors) #+
+  #scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d")
+ #facet_wrap(~Site, nrow = 1, scales = "free_y") +
+
+sal22 <- ggplot(yr22, aes(datetime, gw_salinity, color = Plot)) +
+           geom_point( alpha = 0.5) +
+            geom_line( ) + 
+             facet_wrap(~ Site, scales = "free_y") + 
+             labs(title = "2022", x = "", y = "Salinity") +
+            scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "none", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=12), 
+                 axis.title=element_text(size=12), 
+                strip.text.x = element_text(size = 12)) 
+
+
+sal23 <- ggplot(yr23, aes(datetime, gw_salinity, color = Plot)) +
+           geom_point( alpha = 0.5) +
+            geom_line( ) + 
+             facet_wrap(~ Site, scales = "free_y") + 
+             labs(title = "2023", x = "", y = "Salinity") +
+            scale_x_datetime(date_breaks = "3 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "bottom", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=12), 
+                 axis.title=element_text(size=12), 
+                strip.text.x = element_text(size = 12)) 
+
+
+box1 <- ggplot()+
+  geom_boxplot(data=yr22, aes(x=Plot, y=gw_salinity, fill=Plot)) + 
+  facet_wrap(~Site, ncol = 2) + 
+  #facet_grid(~factor(Site, levels=c("SWH", "GCW","MSM", "GWI"))) +
+  theme_classic() + 
+  labs(title= "2022", x=" ", y= "Salinity") +
+  scale_fill_manual(values=compass_coolors) +
+  #scale_x_discrete(labels=c("Upland", "Transition", "Wetland")) +
+  theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+        legend.position = "NONE", 
+        legend.title= element_blank(), 
+        axis.text=element_text(size=12), 
+        axis.title=element_text(size=12), 
+        strip.text.x = element_text(size = 12)) 
+
+box1
+
+#####################
+# This is the figure that ended up in the supplemental material
+##################
+
+sals <- ggplot(df, aes(datetime, gw_salinity, color = Plot)) +
+           geom_point( alpha = 0.2) +
+            geom_line( ) + 
+             #facet_wrap(Site ~ year, scales = "free_x") + 
+              facet_grid(Site ~ year, scales = "free") + 
+             labs(title = " ", x = "", y = "Salinity (ppt)") +
+            scale_x_datetime(date_breaks = "7 days", date_labels = "%m/%d") + 
+             theme_classic() + 
+             scale_color_manual(values=compass_coolors) +
+              theme(panel.background = element_rect(colour = "black", linewidth  =1.2), 
+                  legend.position = "bottom", 
+                   legend.title= element_blank(), 
+                axis.text=element_text(size=10), 
+                 axis.title=element_text(size=10), 
+                strip.text.x = element_text(size = 10), 
+                axis.text.x = element_text(size=10), 
+                axis.text.y = element_text(size=10 )) 
+sals
+```
+
+
+#Read out and save waterlevel data 
+```{r}
+
+#write.csv(dat, "COMPASS_Synoptic_CB_WaterLevels.csv")
+
+```

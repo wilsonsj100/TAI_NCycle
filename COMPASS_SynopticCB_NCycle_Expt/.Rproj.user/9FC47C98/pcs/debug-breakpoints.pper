@@ -1,0 +1,51 @@
+{
+    "debugBreakpointsState": {
+        "breakpoints": [
+            {
+                "id": 0,
+                "path": "S:/Biogeochemistry/People/Wilson (Steph)/Compass N Cycle Experiment/Full Incub. Experiment/Manuscript/SBB Revision 3/N Cycle Github Page/COMPASS_SynopticCB_NCycle_Expt/IRMS Data/Analysis Files/COMPASS_NExperiment_Ncalc_250uL_Loop.R",
+                "line_number": 23,
+                "function_steps": "",
+                "function_name": "toplevel",
+                "state": 1,
+                "editor_state": 1,
+                "editor_line_number": 23,
+                "is_pending_debug_completion": false,
+                "needs_updated_steps": false,
+                "type": 1,
+                "is_package_breakpoint": false,
+                "package_name": ""
+            },
+            {
+                "id": 1,
+                "path": "S:/Biogeochemistry/People/Wilson (Steph)/Compass N Cycle Experiment/Full Incub. Experiment/Manuscript/SBB Revision 3/N Cycle Github Page/COMPASS_SynopticCB_NCycle_Expt/IRMS Data/Analysis Files/COMPASS_NExperiment_Ncalc_GCrew2.R",
+                "line_number": 29,
+                "function_steps": "",
+                "function_name": "toplevel",
+                "state": 1,
+                "editor_state": 1,
+                "editor_line_number": 29,
+                "is_pending_debug_completion": false,
+                "needs_updated_steps": false,
+                "type": 1,
+                "is_package_breakpoint": false,
+                "package_name": ""
+            },
+            {
+                "id": 2,
+                "path": "S:/Biogeochemistry/People/Wilson (Steph)/Compass N Cycle Experiment/Full Incub. Experiment/Manuscript/SBB Revision 3/N Cycle Github Page/COMPASS_SynopticCB_NCycle_Expt/IRMS Data/Analysis Files/COMPASS_NExperiment_Ncalc_GWI2.R",
+                "line_number": 23,
+                "function_steps": "",
+                "function_name": "toplevel",
+                "state": 1,
+                "editor_state": 1,
+                "editor_line_number": 23,
+                "is_pending_debug_completion": false,
+                "needs_updated_steps": false,
+                "type": 1,
+                "is_package_breakpoint": false,
+                "package_name": ""
+            }
+        ]
+    }
+}
