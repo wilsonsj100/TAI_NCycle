@@ -12,7 +12,6 @@ Last Updated: 05-07-2024
 
 Goal of this code: 
   To take the raw L1 data and calculate waterlevels from pressure and density measured by the aquatroll overtime 
-  
 ```{r setup, include=FALSE}
 
 library(googlesheets4)
@@ -20,8 +19,9 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 library(lubridate)
-library(here)
 
+setwd("S:/Biogeochemistry/People/Wilson (Steph)/Compass N Cycle Experiment/Full Incub. Experiment/Manuscript/Supp Sensor Figs")
+#setwd("S:/Biogeochemistry/COMPASS Synoptics/Samples & Data/Synoptic L1 Sensor/L1_20231107")
 ```
 
 #Read in L1 Dataset
@@ -30,7 +30,7 @@ library(here)
 #download the L1 dataset from: https://drive.google.com/drive/folders/1RP-hxmjAYNGzTfCNpYbMN6U_zbZmEWHM
 
 #set path to local drive where files can be found: 
-L1 <- "Supp Sensor Figs/"
+L1 <- "S:/Biogeochemistry/People/Wilson (Steph)/Compass N Cycle Experiment/Full Incub. Experiment/Manuscript/Supp Sensor Figs"
 #L1 <- "S:/Biogeochemistry/COMPASS Synoptics/Samples & Data/Synoptic L1 Sensor/L1_20241107"
 
 #read in datafiles from L1 
@@ -80,7 +80,7 @@ head(gw1)
 #read in well base elevations (so how high the ground is)
 
 well_elevation <- 
-  read.csv("well_info/COMPASS_CBSynoptic_AQ600_RTK_Data_WellBases.csv")   %>%
+  read.csv("S:/Biogeochemistry/People/Wilson (Steph)/Compass N Cycle Experiment/Full Incub. Experiment/Manuscript/Supp Sensor Figs/well_info/COMPASS_CBSynoptic_AQ600_RTK_Data_WellBases.csv")   %>%
   rename(Long_site = Site,
          Site = Site.Code, 
          Plot = Zone.Code) %>%
@@ -109,9 +109,15 @@ head(df_raw_depths)
 ```{r}
 ## Second, read in well dimensions. These are measurements made when installing
 ## sensors, and are used to calculate the distance below-ground that the 
+#well_dimensions <- read_sheet("https://docs.google.com/spreadsheets/d/1O4sHvj2FO7EcWEm3WpKEZhFubGn8HCcUsz9EFXhQTXM/edit#gid=0") %>% 
+#  mutate(Plot = case_when(transect_location == "Upland" ~ "UP", 
+ #                             transect_location == "Transition" ~ "TR", 
+ #                             transect_location == "Wetland" ~ "W"), 
+ #        ground_to_sensor_cm = ring_to_pressure_sensor_cm - (well_top_to_ground_cm - bolt_to_cap_cm)) %>% 
+ # dplyr::select(site, Plot, ground_to_sensor_cm)
 
 well_dimensions <- 
-  read.csv("well_info/well_dimensions.csv") %>% 
+  read.csv("S:/Biogeochemistry/People/Wilson (Steph)/Compass N Cycle Experiment/Full Incub. Experiment/Manuscript/Supp Sensor Figs/well_info/well_dimensions.csv") %>% 
   mutate(Plot = case_when(transect_location == "Upland" ~ "UP", 
                               transect_location == "Transition" ~ "TR", 
                               transect_location == "Wetland" ~ "W"), 
@@ -437,7 +443,10 @@ sals
 
 #Read out and save waterlevel data 
 ```{r}
+#set a new working directory to put this in 
+#setwd("S:/Biogeochemistry/COMPASS Synoptics/Samples & Data/Fluxes/Macrophyte GHG Fluxes/Flux Calculations/Air Temp Data")
 
 #write.csv(dat, "COMPASS_Synoptic_CB_WaterLevels.csv")
+
 
 ```
