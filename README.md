@@ -2,6 +2,8 @@
 
 This GitHub page hosts the data and code for the COMPASS-FME (https://compass.pnnl.gov/) Chesapeake Bay Synoptic Site N Cycle Experiment conducted in 2022. All code and data can be found on this Github page. 
 
+Data from this work is also hosted on ESS DIVE via: https://data.ess-dive.lbl.gov/datasets/doi:10.15485/2587853 
+
 **Graphical abstract from Wilson et al., (2025):** 
 ![Wilson_etal_NCycle_Expt5](Graphical_Abstract.png)
 
